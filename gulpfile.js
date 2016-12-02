@@ -51,6 +51,12 @@ gulp.task('images', function() {
     .pipe(notify({ message: 'Images task complete' }));
 });
 
+// Html
+gulp.task('html', function() {
+    gulp.src("*.html")
+        .pipe(livereload(server));
+})
+
 // Clean
 gulp.task('clean', function() {
   return gulp.src(['dist/styles', 'dist/scripts', 'dist/images'], {read: false})
@@ -88,6 +94,11 @@ gulp.task('watch', function() {
       console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
       gulp.run('images');
     });
+
+    // Watch html files
+    gulp.watch('**/*.html', function(event) {
+        gulp.run('html');
+    })
 
   });
 
